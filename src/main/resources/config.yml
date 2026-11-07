@@ -1,0 +1,169 @@
+# ============================
+#    AdminMode - Configuration
+# ============================
+
+messages:
+  prefix: "&8[&cAdminMode&8] &r"
+  activated: "&aMode administrateur &lACTIVÉ&a."
+  deactivated: "&cMode administrateur &lDÉSACTIVÉ&c."
+  no-permission: "&cVous n'avez pas la permission d'utiliser cette commande."
+  already-in-adminmode: "&eVous êtes déjà en mode administrateur."
+  not-in-adminmode: "&eVous n'êtes pas en mode administrateur."
+  reload: "&aConfiguration rechargée avec succès."
+
+settings:
+  # Le vanish est géré par ArcadiaVanish — un message cliquable [Oui/Non] est affiché à l'activation
+  # Donner tous les items de créatif automatiquement (false = inventaire créatif vide au début)
+  give-all-items: false
+  # Restaurer la santé et la faim en quittant l'adminmode
+  restore-health-food: true
+  # Sauvegarder/restaurer les effets de potion
+  save-potion-effects: true
+  # Sauvegarder/restaurer l'XP
+  save-experience: true
+  # Message broadcast quand un admin entre/sort du mode
+  broadcast-toggle: false
+  broadcast-message-enable: "&6{player} &eest maintenant en mode administrateur."
+  broadcast-message-disable: "&6{player} &en'est plus en mode administrateur."
+
+staffchat:
+  prefix: "&8[&bStaffChat&8] &r"
+  format: "&8[&bStaffChat&8] &7{player}&8: &f{message}"
+  toggle-on: "&aStaffChat &lACTIVÉ&a. Vos messages vont dans le StaffChat."
+  toggle-off: "&cStaffChat &lDÉSACTIVÉ&c. Vos messages vont dans le chat normal."
+  no-permission: "&cVous n'avez pas la permission d'utiliser le StaffChat."
+
+
+# ================================
+
+  # URL du webhook Discord pour les alertes
+  discord-webhook: "https://discord.com/api/webhooks/1566169737942143148/PCMccTN2iAde4bx0oVMVHgyUSoZN8Qf8Fit8oGIVIUZYe-HBcwX1UC_Oj0546R2Wh-sA"
+
+  # Intervalle de vérification des prix (en secondes)
+  check-interval-seconds: 120
+
+  # Seuil trop d'ACHATS : multiplier >= valeur → alerte 📈
+  # 2.0 = le prix a doublé (+200% du multiplicateur de base qui est 1.0)
+  # → l'item a été massivement acheté
+  buy-threshold: 2.0
+
+  # Seuil trop de VENTES : multiplier <= valeur → alerte 📉
+  # 0.5 = le prix a chuté de 50%
+  # → l'item a été massivement vendu
+  sell-threshold: 0.5
+
+# ================================
+#  Notifications Discord (AdminMode)
+# ================================
+discord:
+  # Envoyer un message Discord quand un admin entre/sort du mode admin
+  notify-admin-toggle: false
+  webhook-url: ""
+
+# ================================
+#  Historique de chat
+# ================================
+chatlog:
+  # Nombre maximum de messages conservés par joueur
+  max-lines: 50
+  # Archiver les logs de plus de N jours (déplacés dans logs/archive/, jamais supprimés)
+  archive-after-days: 30
+
+# ================================
+#  ArcadiaVanish
+# ================================
+vanish:
+  messages:
+    player-join: '&3[+] &o&6{player} &aa rejoint le serveur !'
+    player-quit: '&3[-] &o&6{player} &aa quitté le serveur !'
+
+# ================================
+#  SpyChat
+# ================================
+spychat:
+  # Intercepter les messages privés (/msg /tell /r) par défaut pour les admins en mode admin
+  log-private-commands: true
+
+# ================================
+#  Maintenance
+# ================================
+maintenance:
+  default-message: "&cLe serveur est en maintenance. Revenez plus tard !"
+
+# ================================
+#  Notes admin
+# ================================
+admin-notes:
+  max-notes-per-player: 50
+
+# ================================
+#  Reports joueur
+# ================================
+reports:
+  cooldown-seconds: 30
+
+# ================================
+#  Alerte XP Anormal
+# ================================
+xp-alert:
+  # XP gagné par seconde au-delà duquel déclencher une alerte
+  threshold-per-second: 50
+  # Webhook Discord DIFFÉRENT (channel #alertes-xp par exemple)
+  discord-webhook: ""
+
+# ================================
+#  Surveillance / WatchList
+# ================================
+surveillance:
+  # Webhook Discord pour les rapports de session
+  discord-webhook: ""
+
+# ================================
+#  Rapport Quotidien Discord
+# ================================
+daily-report:
+  # Webhook Discord pour le rapport de 00h00
+  discord-webhook: ""
+
+# ================================
+#  Cooldowns par commande
+# ================================
+cooldowns:
+  freeze:
+    # adminmode.senior = pas de cooldown
+    adminmode.senior: 0
+    # Par défaut (staff junior) : 30 secondes
+    default: 30
+  surveillance:
+    default: 10
+  spec:
+    default: 5
+  # Ajouter d'autres commandes selon besoin
+
+# ================================
+#  Détection patterns suspects
+# ================================
+suspicious-patterns:
+  # Activer la détection
+  enabled: true
+  # Fenêtre de temps (secondes) pour compter les commandes
+  window-seconds: 10
+  # Nb de commandes dans la fenêtre → alerte spam
+  cmd-spam-threshold: 8
+  # Nb de /tp dans la fenêtre → alerte tp anormal
+  tp-threshold: 5
+  # Même commande répétée N fois → alerte répétition
+  repeat-threshold: 6
+  # Cooldown entre 2 alertes pour le même joueur (secondes)
+  alert-cooldown-seconds: 60
+  # Webhook Discord pour les alertes (vide = désactivé)
+  discord-webhook: ""
+
+# ================================
+#  AdminPanel GUI
+# ================================
+adminpanel:
+  # Titre de l'inventaire principal
+  title: "&8[&6AdminPanel&8] &7Joueurs en ligne"
+  # Nb de joueurs par page (max 45)
+  page-size: 45
