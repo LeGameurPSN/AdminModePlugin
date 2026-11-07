@@ -1,0 +1,239 @@
+name: AdminMode
+version: 1.0.0
+main: fr.evolumc.adminmode.AdminMode
+api-version: '1.21'
+authors: [EvoluMC, ClaudeAI]
+description: Mode administrateur avec vanish, noclip, freeze, spy, track, report, notes, maintenance et outils staff.
+
+softdepend: [DiscordSRV]
+
+commands:
+  # ── AdminMode principal ──────────────────────────────────────────────────
+  adminmode:
+    description: Active/désactive le mode administrateur
+    usage: /adminmode [back|fly|freeze|spy|spec|chatlog|stats|vanish|noclip|tpp|vanishtp|list|reload|hud]
+    aliases: [am, admin]
+    permission: adminmode.use
+
+  # ── StaffChat ────────────────────────────────────────────────────────────
+  staffchat:
+    description: Active/désactive le StaffChat ou envoie un message staff
+    usage: /staffchat <on|off|message>
+    aliases: [sc]
+    permission: staffchat.use
+
+  # ── Freeze ───────────────────────────────────────────────────────────────
+  freeze:
+    description: Gèle / dégèle un joueur (durée et raison optionnelles)
+    usage: "/freeze <joueur> [durée: 30s/5m/2h] [raison]"
+    permission: adminmode.freeze
+
+  freezeall:
+    description: Gèle tous les joueurs en ligne
+    usage: /freezeall
+    permission: adminmode.freezeall
+
+  # ── Spy & Track ──────────────────────────────────────────────────────────
+  spy:
+    description: Voir l'inventaire + spy temps réel d'un joueur | /spy chat pour le SpyChat
+    usage: /spy <joueur> | /spy chat
+    permission: adminmode.spy
+
+  track:
+    description: Tracker la position d'un joueur via la boussole + HUD
+    usage: /track <joueur> | /track stop
+    permission: adminmode.track
+
+  # ── Logs ─────────────────────────────────────────────────────────────────
+  chatlog:
+    description: Voir les derniers messages d'un joueur
+    usage: /chatlog <joueur> [nombre]
+    permission: adminmode.chatlog
+
+  cmdlog:
+    description: Voir les dernières commandes d'un joueur
+    usage: /cmdlog <joueur> [nombre]
+    permission: adminmode.chatlog
+
+  # ── Téléportation ────────────────────────────────────────────────────────
+  tpb:
+    description: Retourner à la position avant la dernière téléportation admin
+    usage: /tpb
+    aliases: [teleportback]
+    permission: adminmode.use
+
+  # ── Report ───────────────────────────────────────────────────────────────
+  report:
+    description: Signaler un joueur au staff
+    usage: /report <joueur> <raison>
+    permission: adminmode.report
+
+  # ── Notes admin ───────────────────────────────────────────────────────────
+  note:
+    description: Gérer les notes admin sur un joueur
+    usage: /note <joueur> <texte|list|del <id>>
+    permission: adminmode.note
+
+  # ── Maintenance ───────────────────────────────────────────────────────────
+  maintenance:
+    description: Passer le serveur en mode maintenance
+    usage: /maintenance <on [message]|off>
+    permission: adminmode.maintenance
+
+  # ── HUD GUI ───────────────────────────────────────────────────────────────
+  adminhud:
+    description: Configurer les éléments du HUD admin
+    usage: /adminhud
+    aliases: [hudsettings]
+    permission: adminmode.use
+
+  # ── Spec ─────────────────────────────────────────────────────────────────
+  spec:
+    description: Observer un joueur en mode spectateur furtif
+    usage: /spec <joueur>
+    permission: adminmode.spec
+
+  # ── Commandes Vanish ──────────────────────────────────────────────────────
+  vanish:
+    description: Activer/désactiver le vanish
+    usage: /vanish [joueur]
+    aliases: [v]
+    permission: adminmode.vanish
+
+  noclip:
+    description: Activer/désactiver la traversée des murs
+    usage: /noclip
+    permission: adminmode.noclip
+
+  tpp:
+    description: Se téléporter silencieusement à un joueur
+    usage: /tpp <joueur>
+    permission: adminmode.tpp
+
+  vanishtp:
+    description: Activer le vanish et se téléporter à un joueur
+    usage: /vanishtp <joueur>
+    permission: adminmode.vanish
+
+  # ── Surveillance (WatchList + SessionReplay) ───────────────────────────────
+  surveillance:
+    description: Mettre un joueur sous surveillance ou l'en retirer
+    usage: /surveillance <on|off> <joueur>
+    aliases: [watch]
+    permission: adminmode.surveillance
+
+  # ── QuickTP GUI ───────────────────────────────────────────────────────────
+  qtp:
+    description: Ouvre un GUI de TP rapide avec les têtes des joueurs en ligne
+    usage: /qtp
+    aliases: [quicktp]
+    permission: adminmode.qtp
+
+  # ── Stats commandes admin ─────────────────────────────────────────────────
+  adminstats:
+    description: Affiche les commandes admin les plus utilisées
+    usage: /adminstats [session]
+    aliases: [astats]
+    permission: adminmode.stats
+
+  # ── Playtime ─────────────────────────────────────────────────────────────
+  playtime:
+    description: Voir le temps de connexion total d'un joueur
+    usage: /playtime <joueur>
+    aliases: [pt, onlinetime]
+    permission: adminmode.playtime
+
+  # ── LockCommand ──────────────────────────────────────────────────────────
+  lockcommand:
+    description: Verrouiller/déverrouiller une commande pour les non-OP
+    usage: /lockcommand <commande|list|unlock <cmd>>
+    aliases: [lockcmd]
+    permission: adminmode.lockcommand
+
+  # ── AdminPanel GUI ────────────────────────────────────────────────────────
+  adminpanel:
+    description: Panneau d'administration GUI avec gestion des joueurs en ligne
+    usage: /adminpanel
+    aliases: [panel, ap]
+    permission: adminmode.panel
+
+  # ── StaffList ─────────────────────────────────────────────────────────────
+  stafflist:
+    description: Affiche le staff connecté avec modes actifs et temps de session
+    usage: /stafflist
+    aliases: [sl, staff]
+    permission: staffchat.use
+
+permissions:
+  adminmode.use:
+    description: Permet d'utiliser /adminmode
+    default: op
+  adminmode.bypass:
+    description: Voir les joueurs en vanish, bypass restrictions
+    default: op
+  adminmode.freeze:
+    description: Geler des joueurs (/freeze)
+    default: op
+  adminmode.freezeall:
+    description: Geler tous les joueurs (/freezeall)
+    default: op
+  adminmode.spy:
+    description: Voir l'inventaire + spy temps réel (/spy)
+    default: op
+  adminmode.track:
+    description: Tracker la position d'un joueur (/track)
+    default: op
+  adminmode.spec:
+    description: Mode spectateur furtif (/spec)
+    default: op
+  adminmode.chatlog:
+    description: Voir les logs chat et commandes
+    default: op
+  adminmode.report:
+    description: Signaler un joueur (/report)
+    default: true
+  adminmode.note:
+    description: Gérer les notes admin (/note)
+    default: op
+  adminmode.maintenance:
+    description: Passer en mode maintenance (/maintenance)
+    default: op
+  adminmode.maintenance.bypass:
+    description: Contourner le mode maintenance (rester connecté)
+    default: op
+  adminmode.vanish:
+    description: Utiliser le vanish
+    default: op
+  adminmode.vanish.others:
+    description: Appliquer le vanish à un autre joueur
+    default: op
+  adminmode.noclip:
+    description: Utiliser le noclip
+    default: op
+  adminmode.tpp:
+    description: Téléportation silencieuse
+    default: op
+  staffchat.use:
+    description: Utiliser le StaffChat
+    default: op
+  adminmode.surveillance:
+    description: Mettre un joueur sous surveillance (/surveillance)
+    default: op
+  adminmode.qtp:
+    description: QuickTP GUI (/qtp)
+    default: op
+  adminmode.stats:
+    description: Voir les stats de commandes (/adminstats)
+    default: op
+  adminmode.playtime:
+    description: Voir le temps de connexion (/playtime)
+    default: op
+  adminmode.lockcommand:
+    description: Verrouiller des commandes (/lockcommand)
+    default: op
+  adminmode.panel:
+    description: Ouvrir le panneau d'admin GUI (/adminpanel)
+    default: op
+  adminmode.report.manage:
+    description: Gérer les reports (list/close/info/export)
+    default: op
